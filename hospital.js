@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("logoutButton").addEventListener("click", () => {
         localStorage.removeItem("loggedInHospital");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     });
 
     loadTestData();

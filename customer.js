@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Logout Button
     logoutButton.addEventListener("click", function () {
         localStorage.removeItem("loggedInUser"); // Do NOT remove "testResults"
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     });
 
     populateHospitalDropdown();
