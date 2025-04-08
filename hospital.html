@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="hospital.css">
+</head>
+<body>
+    <header>
+        <h1 class="dashboard-title">Hospital Dashboard</h1>
+        <div class="header-buttons">
+            <button id="darkModeToggle"></button>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </header>
+
+    <section class="hospital-welcome">
+        <h2>Welcome, <span id="hospitalName"></span></h2>
+    </section>
+
+    <div class="dashboard-controls">
+        <label for="dashboardSelect">Select Action:</label>
+        <select id="dashboardSelect">
+            <option value="upload">Upload Test Data</option>
+            <option value="view">View Test Data</option>
+        </select>
+    </div>
+
+    <main>
+        <!-- Upload Section -->
+        <section id="uploadSection">
+            <h2>Upload Test Data</h2>
+            <form id="testForm">
+                <div class="form-group">
+                    <label for="username">Patient Username:</label>
+                    <input type="text" id="username" required placeholder="Enter patient's username">
+                </div>
+                <div class="form-group">
+                    <label for="testName">Test Name:</label>
+                    <input type="text" id="testName" required placeholder="Enter test name">
+                </div>
+                <div class="form-group">
+                    <label for="testDate">Date:</label>
+                    <input type="date" id="testDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="testResult">Result:</label>
+                    <input type="text" id="testResult" required placeholder="Enter test result">
+                </div>
+                <div class="form-group">
+                    <label for="doctorNotes">Doctor's Notes:</label>
+                    <textarea id="doctorNotes" placeholder="Enter doctor's notes"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="testPdf">Upload PDF:</label>
+                    <input type="file" id="testPdf" accept="application/pdf" required>
+                </div>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+
+        <!-- View Section -->
+        <section id="viewSection" style="display: none;">
+            <h2>View Test Data</h2>
+            <table id="testDataTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Test Name</th>
+                        <th>Date</th>
+                        <th>Result</th>
+                        <th>Doctor's Notes</th>
+                        <th>PDF</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Test Data Rows -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="hospital.js"></script>
+</body>
+</html>

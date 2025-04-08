@@ -1,0 +1,199 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eef1f7;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background-color: #0073e6;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.main-heading {
+  margin: 0;
+}
+
+.header-buttons {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+#darkModeToggle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(to right, black 50%, white 50%);
+  border: 2px solid #ccc;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+/* Rotate only when clicked */
+.dark-mode #darkModeToggle {
+  transform: rotate(180deg);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Logout Button Animation */
+#logoutButton {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, opacity 0.3s;
+}
+
+#logoutButton:hover {
+  transform: scale(1.05);
+}
+
+#logoutButton:active {
+  transform: scale(0.9);
+  opacity: 0.7;
+}
+
+/* Doctor's Notes Smooth Animation */
+.notes-row {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.notes-row.show {
+  display: table-row;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Table Styling */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #005bb5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-links select, .nav-links input {
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.nav-links input {
+  width: 250px;
+}
+
+main {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #0073e6;
+  color: white;
+  font-size: 1.2em;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.pdf-link {
+  text-decoration: none;
+  color: #0073e6;
+  font-weight: bold;
+}
+
+.pdf-link:hover {
+  text-decoration: underline;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.dark-mode table {
+  background: #333;
+  color: white;
+}
+
+.dark-mode thead {
+  background-color: #555;
+}
+
+.dark-mode tbody tr:nth-child(even) {
+  background-color: #444;
+}
+
+.dark-mode header{
+  background-color: #333;
+}
+
+.dark-mode nav{
+  background-color: #444;
+}
+
+.dark-mode select,option{
+  background-color: #444;
+  border: 1px solid white;
+  color:white;
+}
+
+.dark-mode .inp{
+  background-color: #444;
+  border: 1px solid white;
+  color: white;
+}
+
+.dark-mode tbody tr:hover {
+  background-color: #555;
+}

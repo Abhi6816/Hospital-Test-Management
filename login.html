@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login Page</title>
+   <link rel="stylesheet" href="login.css">
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+   <script src="login.js" defer></script>
+</head>
+<body>
+   <div class="login-container">
+       <h2>Welcome Back!</h2>
+       <p>Please enter your credentials to log in.</p>
+       <form id="login-form">
+           <label for="userType"></label>
+           <select id="userType">
+               <option value="patient">Patient</option>
+               <option value="hospital">Hospital</option>
+           </select>
+           <input type="text" id="username" placeholder="Username" required>
+           <input type="password" id="password" placeholder="Password" required>
+           <button type="submit">Login</button>
+       </form>
+       <p class="register-text">Don't have an account? <a href="register.html" class="register-link">Register here</a></p>
+   </div>
+</body>
+</html>

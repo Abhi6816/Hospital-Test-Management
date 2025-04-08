@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Test Results</title>
+    <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+    <header>
+        <h1 class="main-heading">Patient Test Results</h1>
+        <div class="header-buttons">
+            <button id="darkModeToggle" class="dark-mode-btn"></button>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </header>
+    <nav>
+        <div class="logo">Welcome, Patient</div>
+        <div class="nav-links">
+            <select id="hospitalSelect">
+                <option value="all">All Hospitals</option>
+            </select>
+            <input type="text" id="searchBox" class="inp" placeholder="Search Test Name...">
+        </div>
+    </nav>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Hospital</th>
+                    <th>Date</th>
+                    <th>Result</th>
+                    <th>PDF</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable">
+                <!-- Data will be inserted dynamically -->
+            </tbody>
+        </table>
+    </main>
+    <script src="customer.js"></script>
+</body>
+</html>
