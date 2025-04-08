@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log("✅ User details saved in database!");
 
       // ✅ Redirect to login page
-      window.location.href = "login.html";
+      window.location.href = "index.html";
   }
 
   // ✅ Attach event listener to form
