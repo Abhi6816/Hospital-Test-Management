@@ -1,209 +1,191 @@
-/* General Styles */
+:root {
+  --primary-color: #2c7be5;
+  --danger-color: #e63757;
+  --success-color: #00d97e;
+  --warning-color: #f6c343;
+  --text-color: #12263f;
+  --bg-light: #f5f7fa;
+  --bg-dark: #0b1727;
+  --text-light: #e1e7ef;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    transition: background-color 0.5s, color 0.5s;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0073e6;
-    color: white;
-    padding: 2px;
+/* ===== Dark Mode ===== */
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
 }
 
-.dashboard-title {
-    font-size: 35px;
-    font-weight: bold;
-    text-align: center;
-    flex-grow: 1;
-    padding-left: 100px;
+body.dark-mode .navbar,
+body.dark-mode .card,
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .table,
+body.dark-mode .table-primary,
+body.dark-mode .modal-content {
+  background-color: #12263f !important;
+  color: var(--text-light);
 }
 
-/* Header Buttons */
-.header-buttons {
-    display: flex;
-    gap: 10px;
+body.dark-mode .form-control::placeholder,
+body.dark-mode .form-select option {
+  color: #ccc;
 }
 
-/* Dark Mode Button */
-#darkModeToggle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: linear-gradient(to right, black 50%, white 50%);
-    border: 2px solid #ccc;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+body.dark-mode .btn-outline-light {
+  color: var(--text-light);
+  border-color: var(--text-light);
 }
 
-.dark-mode #darkModeToggle {
-    transform: rotate(180deg);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+body.dark-mode .btn-outline-light:hover {
+  background-color: var(--text-light);
+  color: var(--bg-dark);
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .modal-header {
+  border-bottom: 1px solid #1a2f4f;
+}
+
+body.dark-mode .modal-footer {
+  border-top: 1px solid #1a2f4f;
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1);
+}
+
+/* ===== Components ===== */
+.navbar {
+  box-shadow: 0 0.125rem 0.625rem rgba(140, 152, 164, 0.1);
+}
+
+.card {
+  border: 1px solid #e3ebf6;
+  box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.75rem 2rem rgba(44, 123, 229, 0.1);
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(44, 123, 229, 0.05);
+}
+
+.table .editing-row {
+  background-color: #fff8e1;
+  animation: pulseRow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseRow {
+  from { background-color: #fff8e1; }
+  to { background-color: #ffecb3; }
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.4em 0.6em;
+  font-size: 0.8rem;
+}
+
+.bg-danger {
+  background-color: var(--danger-color) !important;
+}
+
+.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.bg-warning {
+  background-color: var(--warning-color) !important;
+  color: #000;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+/* Buttons */
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.page-link {
+  color: var(--primary-color);
+}
+
+/* Forms */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, 0.25);
+}
+
+/* Modal Preview */
+#pdfViewer {
+  width: 100%;
+  height: 75vh;
+  border: none;
+}
+
+/* Toasts */
+.toast {
+  z-index: 9999;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1rem;
   }
 
-/* Logout Button */
-#logoutButton {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin-right: 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
 
-#logoutButton:hover {
-    background-color: darkred;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.4);
-}
+  .form-control,
+  .form-select {
+    padding: 0.5rem;
+  }
 
-/* Welcome Section */
-.hospital-welcome {
-    text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 2px;
-    background-color: #245bb5;
-    border-radius: 5px;
-    color: white;
-    padding-right: 50px;
-}
-
-/* Dashboard Controls */
-.dashboard-controls {
-    text-align: center;
-    margin: 15px 0;
-}
-
-#dashboardSelect {
-    padding: 5px;
-    font-size: 14px;
-    border-radius: 5px;
-}
-
-/* Main Container */
-main {
-    max-width: 800px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    transition: background-color 0.5s, box-shadow 0.5s;
-}
-
-/* Form Styles */
-.form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-label {
-    flex: 1;
-    font-weight: bold;
-}
-
-h2{
-    text-align: center;
-}
-
-input, textarea, select {
-    flex: 2;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Submit Button */
-button[type="submit"] {
-    width: 100%;
-    margin-top: 15px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    padding: 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #005bb5;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 115, 230, 0.4);
-}
-
-/* Table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background: #0073e6;
-    color: white;
-}
-
-/* Delete Button */
-.delete-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.delete-btn:hover {
-    background-color: darkred;
-}
-
-/* Dark Mode */
-body.dark-mode {
-    background-color: #222;
-    color: white;
-}
-
-body.dark-mode main {
-    background: #333;
-}
-
-body.dark-mode input, 
-body.dark-mode select, 
-body.dark-mode textarea {
-    background: #555;
-    color: white;
-    border: 1px solid white;
-}
-
-.dark-mode header{
-    background-color: #333
-}
-.dark-mode .hospital-welcome{
-    background-color: #444;
-}
-
-body.dark-mode th {
-    background: #005bb5;
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
 }

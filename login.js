@@ -1,73 +1,75 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    // ✅ Initialize Supabase
-    const SUPABASE_URL = "https://mcfkgnvjeexmzoxnsanm.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZmtnbnZqZWV4bXpveG5zYW5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MjI4MDksImV4cCI6MjA1NjM5ODgwOX0.uZIIiZ16TAu9Gqye4Xp2z65nIEjGBETfwWSba_2fnCw";
+// ✅ Import Supabase Client from CDN
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-    if (typeof supabase === "undefined") {
-        console.error("❌ Supabase is not defined. Ensure supabase-js is loaded before login.js.");
-        return;
+// ✅ Supabase Project Credentials
+const SUPABASE_URL = "https://mcfkgnvjeexmzoxnsanm.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZmtnbnZqZWV4bXpveG5zYW5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MjI4MDksImV4cCI6MjA1NjM5ODgwOX0.uZIIiZ16TAu9Gqye4Xp2z65nIEjGBETfwWSba_2fnCw"; // ← use your real key
+
+// ✅ Create Supabase Client
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+console.log("✅ Supabase client initialized");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("login-form");
+
+  if (!loginForm) return;
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const userType = document.getElementById("userType").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!username || !password) {
+      alert("❌ Please enter both username and password.");
+      return;
     }
 
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    console.log("✅ Supabase initialized successfully");
+    // 🔍 Get user email using username
+    const { data: userRecord, error: userFetchError } = await supabase
+      .from("users")
+      .select("email, username, user_type")
+      .eq("username", username)
+      .single();
 
-    // ✅ Handle User Login
-    async function validateLogin(event) {
-        event.preventDefault();
-
-        // ✅ Get form values
-        const userType = document.getElementById("userType").value;
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-
-        // ✅ Validate input
-        if (!username || !password) {
-            alert("❌ Please enter both username and password.");
-            return;
-        }
-
-        // ✅ Fetch user details by username
-        const { data: userRecord, error: userFetchError } = await supabaseClient
-            .from("users")
-            .select("email, username")  // Fetch both email & username
-            .eq("username", username)
-            .single();
-
-        if (userFetchError) {
-            console.error("🔍 Username fetch error:", userFetchError);
-            alert("❌ User not found. Please check your username.");
-            return;
-        }
-
-        // ✅ Attempt to log in using the fetched email
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email: userRecord.email,
-            password: password
-        });
-
-        if (error) {
-            console.error("❌ Login error:", error);
-            alert("❌ Invalid username or password. Please try again.");
-            return;
-        }
-
-        // ✅ Store login details in localStorage
-        localStorage.setItem("loggedInUser", userRecord.email);
-        localStorage.setItem("username", username); // Store the username
-        localStorage.setItem("userType", userType);
-
-        alert(`✅ Welcome, ${userRecord.username}! Redirecting to dashboard...`);
-
-        // ✅ Redirect based on user type
-        if (userType === "patient") {
-            window.location.href = "customer.html";
-        } else {
-            localStorage.setItem("loggedInHospital", userRecord.email);
-            window.location.href = "hospital.html";
-        }
+    if (userFetchError || !userRecord) {
+      console.error("🔍 Username fetch error:", userFetchError);
+      alert("❌ User not found. Please check your username.");
+      return;
     }
 
-    // ✅ Attach event listener to login form
-    const loginForm = document.getElementById("login-form");
-    loginForm.addEventListener("submit", validateLogin);
+    // ✅ Verify role from database
+    if (userRecord.user_type !== userType) {
+      alert(`❌ Access denied: You are registered as a ${userRecord.type}, not a ${userType}.`);
+      return;
+    }
+
+    // 🔐 Attempt login
+    const { error: loginError } = await supabase.auth.signInWithPassword({
+      email: userRecord.email,
+      password: password,
+    });
+
+    if (loginError) {
+      console.error("❌ Login error:", loginError);
+      alert("❌ Invalid username or password.");
+      return;
+    }
+
+    // ✅ Store session
+    localStorage.setItem("username", userRecord.username);
+    localStorage.setItem("userType", userType);
+
+    alert(`✅ Welcome, ${userRecord.username}! Redirecting...`);
+
+    if (userType === "patient") {
+      window.location.href = "customer.html";
+    } else if (userType === "hospital") {
+      localStorage.setItem("loggedInHospital", userRecord.username);
+      window.location.href = "hospital.html";
+    } else {
+      alert("❌ Unknown user type.");
+    }
+  });
 });
