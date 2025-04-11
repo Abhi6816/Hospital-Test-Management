@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             message.textContent = error.message;
             return;
         }
-
+        
         // Insert extra user data into 'users' table
         const { data, error: insertError } = await supabaseClient
             .from("users")
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         console.log("✅ User registered & data inserted successfully.");
-        alert("Registration Successful! Please Login.");
+        alert("A confirmation email has been sent to your inbox. Please confirm your email before logging in.");
         window.location.href = "index.html"; // Redirect to login page
     });
 });
