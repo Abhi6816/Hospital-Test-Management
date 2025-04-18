@@ -41,9 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 message.textContent = data.error || "Registration failed!";
                 return;
             }
-
-            message.style.color = "green";
-            message.textContent = "Registration successful! Redirecting...";
+            alert("Please confirm your email sent to your inbox before logging in");
             setTimeout(() => {
                 window.location.href = "index.html";
             }, 1500);
