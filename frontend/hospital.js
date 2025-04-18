@@ -6,7 +6,7 @@ if (localStorage.getItem("userType") !== "hospital") {
 
 // Constants
 const RECORDS_PER_PAGE = 5;
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://hospital-test-management.onrender.com";
 
 // State
 let currentPage = 1;

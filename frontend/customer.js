@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetch test data from the backend API
   async function fetchData() {
-    const response = await fetch(`http://localhost:5000/api/test-results?username=${username}`);
+    const response = await fetch(`https://hospital-test-management.onrender.com/api/test-results?username=${username}`);
     
     if (!response.ok) {
       showToast("❌ Failed to load test results.");
