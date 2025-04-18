@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Placeholder AI Analysis function
   async function getAIAnalysis(text) {
     try {
-      const response = await fetch("http://localhost:5000/analyze", {
+      const response = await fetch("https://hospital-test-management.onrender.com/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
