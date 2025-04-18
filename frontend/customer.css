@@ -1,0 +1,177 @@
+:root {
+  --primary-color: #2c7be5;
+  --danger-color: #e63757;
+  --success-color: #00d97e;
+  --warning-color: #f6c343;
+  --text-color: #12263f;
+  --bg-light: #f5f7fa;
+  --bg-dark: #0b1727;
+  --text-light: #e1e7ef;
+}
+
+/* ========== BASE ========== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  transition: 0.3s ease-in-out;
+}
+
+/* ========== DARK MODE ========== */
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+body.dark-mode .navbar,
+body.dark-mode .card,
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .table,
+body.dark-mode .table-primary,
+body.dark-mode .modal-content {
+  background-color: #12263f !important;
+  color: var(--text-light);
+}
+
+body.dark-mode .form-control::placeholder,
+body.dark-mode .form-select option {
+  color: #ccc;
+}
+
+body.dark-mode .btn-outline-light {
+  color: var(--text-light);
+  border-color: var(--text-light);
+}
+
+body.dark-mode .btn-outline-light:hover {
+  background-color: var(--text-light);
+  color: var(--bg-dark);
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .modal-header {
+  border-bottom: 1px solid #1a2f4f;
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1);
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  box-shadow: 0 0.125rem 0.625rem rgba(140, 152, 164, 0.1);
+}
+
+/* ========== CARDS & TABLE ========== */
+.card {
+  border: 1px solid #e3ebf6;
+  box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05);
+  transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.75rem 2rem rgba(44, 123, 229, 0.1);
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(44, 123, 229, 0.05);
+}
+
+/* ========== BADGES ========== */
+.badge {
+  font-weight: 500;
+  padding: 0.4em 0.6em;
+  font-size: 0.8rem;
+  border-radius: 0.3rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.bg-danger {
+  background-color: var(--danger-color) !important;
+}
+
+.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.bg-warning {
+  background-color: var(--warning-color) !important;
+  color: #000;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* ========== TOAST ========== */
+.toast {
+  opacity: 0.95;
+}
+
+
+
+/* ========== MODAL PDF VIEW ========== */
+#pdfViewer {
+  width: 100%;
+  height: 75vh;
+  border: none;
+}
+
+/* ========== ANIMATION ========== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .form-control,
+  .form-select {
+    padding: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+
+  #logoutButton span {
+    display: none;
+  }
+}
