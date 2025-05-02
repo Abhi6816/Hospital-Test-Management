@@ -10,51 +10,170 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
 </head>
 <body class="light-mode">
-
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 py-3 shadow">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark shadow">
+    <div class="container-fluid px-4 py-2">
       <span class="navbar-brand d-flex align-items-center">
-        <i class="fas fa-user-injured me-2"></i>
-        <span>Welcome, <span id="userNameDisplay" class="fw-bold">Patient</span></span>
+        <i class="fas fa-heartbeat me-2"></i>
+        <span>HealthStop</span>
       </span>
-      <div class="ms-auto d-flex align-items-center gap-2 flex-nowrap">
-        <select id="hospitalSelect" class="form-select me-2">
-          <option value="all">All Hospitals</option>
-        </select>
-        <input type="text" id="searchBox" class="form-control me-2" placeholder="Search Test Name..."/>
-        <div id="darkModeToggle" class="btn btn-outline-light d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-          <i class="fas fa-moon"></i>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto gap-4">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-section="dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-section="results">My Results</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-white"><i class="fas fa-user-circle me-1"></i> <span id="userNameDisplay" class="fw-bold">Patient</span></span>
+          <button id="darkModeToggle" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button id="logoutButton" class="btn btn-primary btn-sm d-flex align-items-center gap-2 px-3">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
         </div>
-        <button id="logoutButton" class="btn btn-danger d-flex align-items-center gap-2 px-3" style="white-space: nowrap;">
-          <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-        </button>
       </div>
     </div>
   </nav>
 
-  <!-- Table Section -->
-  <div class="container my-4">
-    <div class="card shadow-sm">
-      <div class="card-header bg-primary text-white d-flex align-items-center">
-        <i class="fas fa-file-medical-alt me-2"></i>
-        <h5 class="mb-0">Your Test Results</h5>
+  <!-- Main Content Wrapper -->
+  <div class="main-content">
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="container my-5">
+      <h4 class="mb-4">Patient Dashboard</h4>
+      <h6 class="mb-4">Welcome back, <span id="welcomeUserName">Patient</span></h6>
+
+      <!-- Health Summary -->
+      <div class="row mb-5">
+        <div class="col-md-3 mb-3">
+          <div class="card stat-card">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-flask stat-icon me-3 text-primary"></i>
+              <div>
+                <h6 class="mb-0">Total Tests</h6>
+                <p class="stat-value" id="totalTests">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card stat-card">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-heartbeat stat-icon me-3 text-success"></i>
+              <div>
+                <h6 class="mb-0">Normal Results</h6>
+                <p class="stat-value" id="normalResults">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card stat-card">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-exclamation-circle stat-icon me-3 text-warning"></i>
+              <div>
+                <h6 class="mb-0">Abnormal Results</h6>
+                <p class="stat-value" id="abnormalResults">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card stat-card">
+            <div class="card-body d-flex align-items-center">
+              <i class="fas fa-exclamation-triangle stat-icon me-3 text-danger"></i>
+              <div>
+                <h6 class="mb-0">Critical Results</h6>
+                <p class="stat-value" id="criticalResults">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body table-responsive">
-        <table class="table table-hover align-middle">
-          <thead class="table-primary">
-            <tr>
-              <th>Test Name</th>
-              <th>Hospital</th>
-              <th>Date</th>
-              <th>Result</th>
-              <th>Notes</th>
-              <th>PDF</th>
-              <th>Analyze</th>
-            </tr>
-          </thead>
-          <tbody id="resultsTable"></tbody>
-        </table>
+
+      <!-- Recent Test Results -->
+      <div class="card mb-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Recent Test Results</h5>
+          <a href="#" class="btn btn-outline-black btn-sm view-all-tests" data-section="results">View All</a>
+        </div>
+        <div class="card-body">
+          <div id="recentLoading" class="text-center d-none"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+          <ul class="list-group list-group-flush" id="recentTestResults">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Results Section -->
+    <div id="resultsSection" class="container my-5" style="display: none;">
+      <h4 class="mb-2">My Test Results</h4>
+      <p class="mb-4 subtitle">View and analyze your medical test results</p>
+      <div class="d-flex justify-content-between mb-4 gap-3 flex-wrap align-items-center">
+        <div class="search-wrapper position-relative flex-grow-1">
+          <i class="fas fa-search position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); color: #A1A1AA;"></i>
+          <input type="text" id="searchBox" class="form-control ps-5" placeholder="Search by test name..."/>
+        </div>
+        <select id="statusSelect" class="form-select" style="max-width: 200px; flex-shrink: 0;">
+          <option value="all">All Status</option>
+          <option value="normal">Normal</option>
+          <option value="abnormal">Abnormal</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <div class="row" id="resultsCards">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Test Details Section -->
+    <div id="detailsSection" class="container my-5" style="display: none;">
+      <a href="#" class="text-primary mb-3 d-flex align-items-center gap-2 back-to-results" data-section="results">
+        <i class="fas fa-arrow-left"></i> Back to Results
+      </a>
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center test-header">
+          <h5 class="mb-0" id="detailsTestName">Test Name</h5>
+          <span class="badge" id="detailsTestStatus">Status</span>
+        </div>
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <h6>Patient Information</h6>
+              <p id="detailsPatientInfo">Patient: <span id="detailsPatientName"></span></p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <h6>Test Date</h6>
+              <p id="detailsTestDate"></p>
+            </div>
+          </div>
+          <h6 class="mt-4">Doctor's Notes</h6>
+          <p id="detailsDoctorNotes" style="white-space: pre-line;"></p>
+          <div class="text-end mt-3">
+            <button id="viewPdfButton" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#pdfModal">
+              <i class="fas fa-eye me-1"></i> View PDF
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0"><i class="fas fa-robot me-2"></i> AI Analysis</h5>
+          <button id="analyzeNowButton" class="btn btn-primary btn-sm">Analyze Now</button>
+        </div>
+        <div class="card-body text-center" id="aiAnalysisContent">
+          <i class="fas fa-flask fa-3x text-muted mb-3"></i>
+          <p class="text-muted">No Analysis Available</p>
+          <p class="text-muted">Get an AI-powered analysis of your test results with explanations in simple language.</p>
+          <button id="generateAnalysisButton" class="btn btn-primary">Generate Analysis</button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,9 +182,9 @@
   <div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header">
           <h5 class="modal-title">PDF Report</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-0">
           <iframe id="pdfViewer" style="width:100%; height:75vh; border:none;"></iframe>
@@ -78,9 +197,9 @@
   <div class="modal fade" id="notesModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="notesModalLabel">Doctor Notes</h5>      
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <div class="modal-header">
+          <h5 class="modal-title" id="notesModalLabel">Doctor Notes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <p id="notesContent" style="white-space: pre-line;"></p>
@@ -93,14 +212,19 @@
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
     <div class="toast align-items-center text-white bg-dark border-0" role="alert" id="mainToast" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
-        <div class="toast-body">Hello</div>
+        <div class="toast-body"></div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
+  <footer class="footer text-center py-4">
+    <p>© 2025 Hospital Dashboard. Made with <span class="heart">❤️</span> for better healthcare.</p>
+  </footer>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="customer.js"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93991deb187d7bcf',t:'MTc0NjIwNTY2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

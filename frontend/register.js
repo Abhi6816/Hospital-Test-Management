@@ -3,13 +3,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("register-form");
     const message = document.getElementById("message");
+    const userTypeInput = document.getElementById("userType");
+    const userTypeButtons = document.querySelectorAll(".user-type-btn");
+
+    // Attach listeners to user type buttons
+    userTypeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            userTypeButtons.forEach(btn => btn.classList.remove("active"));
+            // Add active class to clicked button
+            button.classList.add("active");
+            // Update hidden input value
+            userTypeInput.value = button.dataset.type;
+        });
+    });
 
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
         message.textContent = "";
         message.style.color = "red";
 
-        const userType = document.getElementById("userType").value;
+        const userType = userTypeInput.value;
         const username = document.getElementById("username").value.trim();
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
@@ -27,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("https://hospital-test-management.onrender.com/register", {
+            const response = await fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

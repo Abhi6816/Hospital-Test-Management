@@ -1,12 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("login-form");
+  const userTypeInput = document.getElementById("userType");
+  const userTypeButtons = document.querySelectorAll(".user-type-btn");
 
   if (!loginForm) return;
+
+  // Attach listeners to user type buttons
+  userTypeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // Remove active class from all buttons
+      userTypeButtons.forEach(btn => btn.classList.remove("active"));
+      // Add active class to clicked button
+      button.classList.add("active");
+      // Update hidden input value
+      userTypeInput.value = button.dataset.type;
+    });
+  });
 
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const userType = document.getElementById("userType").value;
+    const userType = userTypeInput.value;
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
@@ -16,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("https://hospital-test-management.onrender.com/api/login", {
+      const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

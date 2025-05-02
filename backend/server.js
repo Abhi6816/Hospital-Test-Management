@@ -37,16 +37,20 @@ app.post('/analyze', async (req, res) => {
               {
                 text: `You are an experienced medical expert and pathologist.
 
-Analyze the following medical report values carefully and provide a detailed health analysis for the patient in simple words.
+Analyze the following medical report values carefully and provide a detailed health analysis for the patient in simple, easy-to-understand language.
 
-For every abnormal value (high or low), explain what it means and what it might indicate.
+Health Analysis
 
-Also, provide suggestions or recommendations based on the report values if needed.
+For each value in the report, explain whether it is normal, high, or low. If a value is abnormal (either high or low), describe what this means for the patient's health and what conditions it might indicate.
 
-Strictly avoid mentioning any location, lab name, patient details, or extra information.
+Recommendations
 
-Only provide health analysis based on the medical report values.
+Based on the report values, provide suggestions or recommendations to improve the patient's health if needed. Focus on practical steps the patient can take or further tests that might be necessary.
 
+Important Notes
+
+Do not include any location, lab name, patient details, or extra information beyond the medical report values.
+Focus only on the health analysis and recommendations based on the provided values.
 Medical Report:
 ${text}`
               }
