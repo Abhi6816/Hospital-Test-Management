@@ -10,7 +10,7 @@ function escapeHtml(str) {
     return escapeChars[match] || match;
   });
 }
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://hospital-test-management.onrender.com";
 
 document.addEventListener("DOMContentLoaded", async () => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js";

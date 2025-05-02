@@ -1,6 +1,6 @@
 const RECORDS_PER_PAGE = 5;
 const RECENT_RECORDS = 5;
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://hospital-test-management.onrender.com";
 
 let currentPage = 1;
 let allRecords = [];
